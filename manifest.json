@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Video Playback Speed",
+  "version": "1.0",
+  "description": "Allows you to adjust the playback speed of videos",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "index.css"
+      ],
+      "type": "module"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "playback-speed",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "vite.config.js",
+  "scripts": {
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^6.1.1",
+    "prettier": "^3.5.3",
+    "vite": "^6.3.5",
+    "vite-plugin-static-copy": "^2.3.1"
+  }
+}
