@@ -28,7 +28,8 @@
       "css": [
         "index.css"
       ],
-      "type": "module"
+      "type": "module",
+      "all_frames": true
     }
   ]
 }

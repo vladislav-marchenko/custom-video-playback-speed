@@ -1,11 +1,19 @@
-const getButtonHTML = () => {
-  return new DOMParser().parseFromString(
-    `<button style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%);">Click me</button>`,
-    'text/html'
-  ).body.firstChild
+const getMenuHTML = () => {
+  const menuHTML = `
+    <div class="speed-control-menu">
+      <button class="decrease-speed">-</button>
+      <span class="speed-display">1.00x</span>
+      <button class="increase-speed">+</button>
+    </div>
+  `
+  return new DOMParser().parseFromString(menuHTML, 'text/html').body.firstChild
 }
 
-const observer = new MutationObserver(() => {
+const updateSpeedDisplay = (video, speedDisplay) => {
+  speedDisplay.textContent = `${video.playbackRate.toFixed(2)}x`
+}
+
+const addMenuToVideo = () => {
   const video = document.querySelector('video')
   if (!video || video.classList.contains('observed')) return
 
@@ -14,15 +22,35 @@ const observer = new MutationObserver(() => {
   const parent = video.parentNode
   if (!parent) return
 
-  parent.style = 'position: relative'
+  parent.style = 'position: relative;'
 
-  const button = getButtonHTML()
-  parent.appendChild(button)
+  const menu = getMenuHTML(video)
+  if (!menu) return
 
-  button.addEventListener('click', (e) => {
+  parent.appendChild(menu)
+
+  const decreaseButton = menu.querySelector('.decrease-speed')
+  const increaseButton = menu.querySelector('.increase-speed')
+  const speedDisplay = menu.querySelector('.speed-display')
+
+  updateSpeedDisplay(video, speedDisplay)
+
+  decreaseButton.addEventListener('click', (e) => {
     e.stopPropagation()
-    video.playbackRate = video.playbackRate === 1 ? 4 : 1
-  })
-})
 
+    video.playbackRate -= 0.25
+    updateSpeedDisplay(video, speedDisplay)
+  })
+
+  increaseButton.addEventListener('click', (e) => {
+    e.stopPropagation()
+
+    video.playbackRate += 0.25
+    updateSpeedDisplay(video, speedDisplay)
+  })
+}
+
+addMenuToVideo()
+
+const observer = new MutationObserver(addMenuToVideo)
 observer.observe(document.body, { childList: true, subtree: true })
