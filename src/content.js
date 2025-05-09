@@ -13,14 +13,14 @@ const updateSpeedDisplay = (video, speedDisplay) => {
   speedDisplay.textContent = `${video.playbackRate.toFixed(2)}x`
 }
 
-const handleIncreaseSpeed = (e) => {
+const handleIncreaseSpeed = (e, video, speedDisplay) => {
   e.stopPropagation()
 
   video.playbackRate += 0.25
   updateSpeedDisplay(video, speedDisplay)
 }
 
-const handleDecreaseSpeed = (e) => {
+const handleDecreaseSpeed = (e, video, speedDisplay) => {
   e.stopPropagation()
 
   video.playbackRate -= 0.25
@@ -57,10 +57,14 @@ const injectSpeedControlMenu = () => {
 
   updateSpeedDisplay(video, speedDisplay)
 
-  decreaseButton.addEventListener('click', (e) => handleDecreaseSpeed(e))
+  decreaseButton.addEventListener('click', (e) => {
+    handleDecreaseSpeed(e, video, speedDisplay)
+  })
   decreaseButton.addEventListener('dblclick', (e) => e.stopPropagation())
 
-  increaseButton.addEventListener('click', (e) => handleIncreaseSpeed(e))
+  increaseButton.addEventListener('click', (e) => {
+    handleIncreaseSpeed(e, video, speedDisplay)
+  })
   increaseButton.addEventListener('dblclick', (e) => e.stopPropagation())
 }
 
