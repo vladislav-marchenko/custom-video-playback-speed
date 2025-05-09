@@ -1,12 +1,12 @@
 const getSpeedControlMenuHTML = () => {
-  const menuHTML = `
+  const html = `
     <div class="speed-control-menu">
       <button class="decrease-speed">-</button>
       <span class="speed-display">1.00x</span>
       <button class="increase-speed">+</button>
     </div>
   `
-  return new DOMParser().parseFromString(menuHTML, 'text/html').body.firstChild
+  return new DOMParser().parseFromString(html, 'text/html').body.firstChild
 }
 
 const updateSpeedDisplay = (video, speedDisplay) => {
@@ -27,17 +27,24 @@ const handleDecreaseSpeed = (e) => {
   updateSpeedDisplay(video, speedDisplay)
 }
 
+const handleHover = (videoParent) => {
+  let timeout
+  videoParent.addEventListener('mousemove', () => {
+    videoParent.classList.add('active')
+    clearTimeout(timeout)
+    timeout = setTimeout(() => videoParent.classList.remove('active'), 3000)
+  })
+}
+
 const injectSpeedControlMenu = () => {
   const video = document.querySelector('video')
-  if (!video || video.classList.contains('observed')) return
-
-  video.classList.add('observed')
+  if (!video) return
 
   const parent = video.parentNode
-  if (!parent) return
+  if (!parent || parent.classList.contains('observed')) return
 
   parent.classList.add('observed')
-  parent.style = 'position: relative;'
+  handleHover(parent)
 
   const speedControlMenu = getSpeedControlMenuHTML(video)
   if (!speedControlMenu) return
