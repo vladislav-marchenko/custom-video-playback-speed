@@ -34,6 +34,10 @@ const handleHover = (videoParent) => {
     clearTimeout(timeout)
     timeout = setTimeout(() => videoParent.classList.remove('active'), 3000)
   })
+
+  videoParent.addEventListener('mouseleave', () => {
+    videoParent.classList.remove('active')
+  })
 }
 
 const injectSpeedControlMenu = () => {

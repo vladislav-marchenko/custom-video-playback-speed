@@ -14,11 +14,12 @@
 
   opacity: 0;
   visibility: hidden;
-  z-index: 9999;
+  z-index: 20;
 }
 
 .observed {
   position: relative;
+  z-index: 10
 }
 
 .observed.active .speed-control-menu {
