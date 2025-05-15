@@ -1,6 +1,6 @@
 .speed-control-menu {
   position: absolute;
-  top: 70px;
+  top: 5%;
   left: 50%;
   transform: translateX(-50%);
 
@@ -8,7 +8,7 @@
   align-items: center;
 
   background: rgba(0, 0, 0, 0.7);
-  padding: 5px;
+  padding: 5px !important;
   border-radius: 5px;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 
@@ -29,8 +29,8 @@
 
 .increase-speed,
 .decrease-speed {
-  padding: 5px 10px;
-  background: #007bff;
+  padding: 5px 10px !important;
+  background: #007bff !important;
   color: white;
   border: none;
   border-radius: 3px;
